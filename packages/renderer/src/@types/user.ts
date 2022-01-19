@@ -7,4 +7,14 @@ export interface User {
     nickName: string;
     avatar: string;
     cover?: string;
+    bankAccounts?: BankAccount[]
+}
+
+ interface BankAccount {
+    bankName: string;
+    accountType: string;
+    accountNumber: string;
+    branchCode: any;
+    accountBalance: number;
+    accountCreatedAt: Date;
 }
