@@ -8,11 +8,6 @@ const About = React.lazy(() => import('/@/components/About'));
 const App: React.FC = () => {
   return (
     <>
-      <img
-        alt="Vue logo"
-        src="../assets/logo.svg"
-        width="300"
-      />
       <BrowserRouter>
         {/* <AppNavigation /> */}
         <Routes>
