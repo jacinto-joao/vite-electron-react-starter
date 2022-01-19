@@ -9,7 +9,7 @@ function Details({user}:Props) {
 
     const {firstName, lastName, gender, dob} = user;
 
-    const formatDate =(date: Date) => {
+    const formatDate = (date: Date) => {
         return `${date.getDate()}/${date.getMonth() +1}/${date.getFullYear()}`;
     };
 

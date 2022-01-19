@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from './partials/Avatar';
 import Details from './partials/Details';
 import type {User} from '/@/@types';
 
@@ -14,7 +15,7 @@ function UserProfile() {
   return (
     <div className='user-profile'>
 
-        <div className="avatar"></div>
+        <Avatar/>
         <Details user={user} />
     </div>
 

@@ -1,0 +1,27 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-weight: 400;
+
+  &__selfie {
+    width: 150px;
+    height: 25px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+    background-color: $blue;
+    color: $white;
+    font-family: OpenSans;
+    box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      cursor: pointer;
+      background-color: $navy;
+      box-shadow: none;
+    }
+  }
+}
