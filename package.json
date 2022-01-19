@@ -35,6 +35,7 @@
     "eslint-plugin-react": "^7.28.0",
     "nano-staged": "0.5.0",
     "playwright": "1.17.1",
+    "sass": "^1.49.0",
     "simple-git-hooks": "2.7.0",
     "typescript": "4.5.4",
     "vite": "2.7.7"
