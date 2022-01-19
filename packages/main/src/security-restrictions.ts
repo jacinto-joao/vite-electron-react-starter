@@ -1,5 +1,7 @@
-import {app, shell} from 'electron';
+import {app, shell, systemPreferences} from 'electron';
 import {URL} from 'url';
+
+console.log('xx', import.meta.env.VITE_DEV_SERVER_URL);
 
 /**
  * List of origins that you allow open INSIDE the application and permissions for each of them.
@@ -11,6 +13,34 @@ const ALLOWED_ORIGINS_AND_PERMISSIONS = new Map<string, Set<'clipboard-read' | '
     ? [[new URL(import.meta.env.VITE_DEV_SERVER_URL).origin, new Set]]
     : [],
 );
+
+/**
+ * Check Microphone permission
+ */
+
+const micStatus = systemPreferences.getMediaAccessStatus('microphone');
+//console.log(micStatus);
+if (micStatus =='not-determined'){
+  systemPreferences.askForMediaAccess('microphone').then((status) =>{
+    console.log('newstatus', status);
+  }).catch((onError) =>{
+    console.log(onError);
+  });
+}
+
+/**
+ * Check camera permission
+ */
+
+ const cameraPermission = systemPreferences.getMediaAccessStatus('camera');
+ console.log(cameraPermission);
+ if (cameraPermission =='granted'){
+   systemPreferences.askForMediaAccess('camera').then((status) =>{
+     console.log('newstatus', status);
+   }).catch((onError) =>{
+     console.log(onError);
+   });
+ }
 
 /**
  * List of origins that you allow open IN BROWSER.
@@ -53,7 +83,7 @@ app.on('web-contents-created', (_, contents) => {
     }
   });
 
-
+//
   /**
    * Block requested unallowed permissions.
    * By default, Electron will automatically approve all permission requests.
@@ -64,7 +94,12 @@ app.on('web-contents-created', (_, contents) => {
     const {origin} = new URL(webContents.getURL());
 
     const permissionGranted = !!ALLOWED_ORIGINS_AND_PERMISSIONS.get(origin)?.has(permission);
-    callback(permissionGranted);
+   
+    
+    //permissionGranted  (I just disabled it temporary)
+    callback(true);
+
+   
 
     if (!permissionGranted && import.meta.env.DEV) {
       console.warn(`${origin} requested permission for '${permission}', but was blocked.`);

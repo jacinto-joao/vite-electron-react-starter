@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Webcam from 'webcamjs';
 
 function Avatar() {
 
+ const [isCameraOpen, setIsCameraOpen] = useState(false);
+ const [openCameraLabel, setOpenCameraLabel] = useState<string>('Open camera');
   useEffect(() => {
     initCamera();
   },[]);
@@ -14,25 +16,54 @@ function Avatar() {
         image_format: 'jpeg',
         jpeg_quality: 90
       });
-    await	Webcam.attach( '#camera-container');
+   
   };
 
+  //Open camera and take picture.
   const takePicture = async () =>{
-    Webcam.snap( function(data_uri: any) {
-      // display results in page
 
-      console.log(data_uri);
-      // document.getElementById('results').innerHTML = 
-      //   '<img src="'+data_uri+'"/>';
+    if (!isCameraOpen) {
+      await	Webcam.attach( '#camera-container');
+
+      //wait for the js to be attached.
+     setTimeout( async () => {
+      setIsCameraOpen(true);
+      setOpenCameraLabel('Open camera');
+
+     await Webcam.snap( function(data_uri: any) {
+        //Do something with the data.
+        console.log(data_uri);
+      });
+     }, 2000);
+    }
+
+   
+  };
+
+  //close camera
+  const closeCamera = async () => {
+    setIsCameraOpen(false);
+   await Webcam.reset();
+    setOpenCameraLabel('Open camera');
+    
+    //Im using navigator to stop camera in case webCam fails to close camera.
+    navigator.mediaDevices.getUserMedia((stream) =>{
+      stream.stop();
     });
   };
 
   return (
     <>
       <div className="avatar" id='camera-container'></div>
-      <button className='btn btn__selfie' onClick={takePicture}>
-        Take selfie;
+      {!isCameraOpen ? (
+         <button className='btn btn__selfie' onClick={takePicture}>
+         {openCameraLabel}
+       </button>
+      ):(
+        <button className='btn btn__selfie' onClick={closeCamera}>
+        Close camera;
       </button>
+      )}
     </>
   );
 }
