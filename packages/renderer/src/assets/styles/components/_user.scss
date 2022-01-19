@@ -16,7 +16,20 @@
   }
 
   &__name {
-    font-size: 36px;
-    font-family: "Courier New", Courier, monospace;
+    @include Hero;
+  }
+
+  .details {
+    margin-top: 50px;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: $white;
+    box-shadow: 0 6px 24px 0 rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      box-shadow: none;
+      cursor: pointer;
+    }
   }
 }

@@ -1,11 +1,12 @@
 import React from 'react';
+import Details from './partials/Details';
 
 function UserProfile() {
   return (
     <div className='user-profile'>
 
         <div className="avatar"></div>
-        User Profile
+        <Details />
     </div>
 
   );
