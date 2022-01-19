@@ -5,7 +5,6 @@ import UserProfile from './user-profile/UserProfile';
 const wrapperStyles: React.CSSProperties ={
   minHeight: '100vh',
   width: '100%',
-  backgroundColor: '#cccc'
 };
 
 const Home: React.FC = () => {
