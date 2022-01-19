@@ -14,7 +14,6 @@ const user: User = {
 function UserProfile() {
   return (
     <div className='user-profile'>
-
         <Avatar/>
         <Details user={user} />
     </div>
