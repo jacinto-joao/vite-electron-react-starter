@@ -7,4 +7,16 @@
   background-color: rgb(245, 241, 241);
   min-height: 500px;
   padding: 30px;
+
+  .avatar {
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgb(172, 158, 158);
+    border-radius: 6px;
+  }
+
+  &__name {
+    font-size: 36px;
+    font-family: "Courier New", Courier, monospace;
+  }
 }

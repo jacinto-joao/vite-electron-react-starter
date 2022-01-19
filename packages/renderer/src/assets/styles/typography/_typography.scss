@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "StyleScript";
+  src: url("https://fonts.googleapis.com/css2?family=Style+Script&display=swap");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Style+Script&display=swap");
+}
+
+$grey-1: #575757;
+$grey-1-5: #949494;
+$grey-2: #ccc;
+$grey-3: #ececec;
+$grey-4: #f9f9f9;
+$grey-5: #e0e0e0;
+$white: #fff;
+$blue: #3875b3;
+$blue-hover: #4187cf;
+$navy: #103557;
+$navy-hover: #164977;
+$navy-active: #063563;
+$magenta: #b80b4d;
+$orange: #fbb601;
+$yellow: #ffca05;
+$green: #52ae33;
+
+@mixin Hero {
+  font-family: StyleScript;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.17;
+  color: $blue;
+}
+@mixin Mobile---Hero {
+  font-family: StyleScript;
+  font-size: 34px;
+  font-weight: bold;
+  line-height: 1.18;
+  color: $blue;
+}
+@mixin Heading-1 {
+  font-family: StyleScript;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.21;
+  color: $grey-1;
+}
+@mixin Mobile---Heading-1 {
+  font-family: StyleScript;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.23;
+  color: $grey-1;
+}
+@mixin Heading-2 {
+  font-family: StyleScript;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.25;
+  color: $grey-1;
+}
+@mixin Mobile---heading-2 {
+  font-family: StyleScript;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.28;
+  color: $grey-1;
+}
+@mixin Button_text {
+  font-family: OpenSans;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.25;
+  color: $blue;
+}
