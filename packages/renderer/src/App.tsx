@@ -1,8 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './styles.css';
+import './assets/styles/app.scss';
 import Home from '/@/components/Home';
-import AppNavigation from '/@/components/AppNavigation';
 // Lazy load component
 const About = React.lazy(() => import('/@/components/About'));
 
@@ -15,7 +14,7 @@ const App: React.FC = () => {
         width="300"
       />
       <BrowserRouter>
-        <AppNavigation />
+        {/* <AppNavigation /> */}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={
