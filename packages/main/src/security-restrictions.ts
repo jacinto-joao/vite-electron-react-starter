@@ -1,7 +1,6 @@
 import {app, shell, systemPreferences} from 'electron';
 import {URL} from 'url';
 
-console.log('xx', import.meta.env.VITE_DEV_SERVER_URL);
 
 /**
  * List of origins that you allow open INSIDE the application and permissions for each of them.
@@ -19,10 +18,10 @@ const ALLOWED_ORIGINS_AND_PERMISSIONS = new Map<string, Set<'clipboard-read' | '
  */
 
 const micStatus = systemPreferences.getMediaAccessStatus('microphone');
-//console.log(micStatus);
+
 if (micStatus =='not-determined'){
-  systemPreferences.askForMediaAccess('microphone').then((status) =>{
-    console.log('newstatus', status);
+  systemPreferences.askForMediaAccess('microphone').then(() =>{
+   //continue }
   }).catch((onError) =>{
     console.log(onError);
   });
@@ -33,10 +32,10 @@ if (micStatus =='not-determined'){
  */
 
  const cameraPermission = systemPreferences.getMediaAccessStatus('camera');
- console.log(cameraPermission);
+ 
  if (cameraPermission =='granted'){
-   systemPreferences.askForMediaAccess('camera').then((status) =>{
-     console.log('newstatus', status);
+   systemPreferences.askForMediaAccess('camera').then(() =>{
+     //continue
    }).catch((onError) =>{
      console.log(onError);
    });
@@ -52,7 +51,7 @@ if (micStatus =='not-determined'){
  *   href="https://github.com/"
  * >
  */
-const ALLOWED_EXTERNAL_ORIGINS = new Set<`https://${string}`>([
+const ALLOWED_EXTERNAL_ORIGINS = new Set<`https://${string}` | `http://${string}`>([
   'https://vitejs.dev',
   'https://github.com',
   'https://reactjs.org',
@@ -93,11 +92,14 @@ app.on('web-contents-created', (_, contents) => {
   contents.session.setPermissionRequestHandler((webContents, permission, callback) => {
     const {origin} = new URL(webContents.getURL());
 
-    const permissionGranted = !!ALLOWED_ORIGINS_AND_PERMISSIONS.get(origin)?.has(permission);
-   
+    let permissionGranted = !!ALLOWED_ORIGINS_AND_PERMISSIONS.get(origin)?.has(permission);
     
-    //permissionGranted  (I just disabled it temporary)
-    callback(true);
+    //check if permission was denied and if origin is localhost add permission to origin
+    if (!permissionGranted && permission == 'media' && origin.startsWith('http://localhost')) {
+      permissionGranted = !!ALLOWED_ORIGINS_AND_PERMISSIONS.get(origin)?.add(permission);
+    }
+    
+    callback(permissionGranted);
 
    
 

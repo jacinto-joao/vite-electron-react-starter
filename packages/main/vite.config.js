@@ -18,6 +18,11 @@ const config = {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
     },
   },
+  server: {
+    https: true,
+    host:'https//localhost',
+    port: 3000,
+  },
   build: {
     sourcemap: 'inline',
     target: `node${node}`,
