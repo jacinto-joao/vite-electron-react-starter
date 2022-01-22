@@ -10,12 +10,19 @@ const AvatarWebcam = () => {
 
     //Open a web camera;
     const openWebcam = () => {
-
+        if(!isWebcamOpen){
+            setWebCamOpen(true);
+            setIsLoading(true);
+        }else {
+            setWebCamOpen(false);
+            setIsLoading(false);
+        }
     };
 
     //close web cam
     const closeWebcam = () => {
-        //
+        setWebCamOpen(false);
+        setIsLoading(false);
     };
     
   return (
@@ -31,11 +38,11 @@ const AvatarWebcam = () => {
 
                 {
                     !isWebcamOpen ? (
-                        <button>
+                        <button onClick={!isWebcamOpen && openWebcam}>
                             {isLoading ?'please wait ...':'Take picture'}
                         </button>
                     ):(
-                        <button>
+                        <button onClick={closeWebcam}>
                             Close camera
                         </button>
                     )
