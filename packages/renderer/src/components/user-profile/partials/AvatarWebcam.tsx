@@ -13,6 +13,19 @@ const AvatarWebcam = () => {
         if(!isWebcamOpen){
             setWebCamOpen(true);
             setIsLoading(true);
+
+            //Open camera
+            navigator.mediaDevices.getUserMedia({video: true, audio: true})
+                .then(() =>{
+                    let videoElement = document.getElementById('webcam-element');
+				if (videoElement) {
+					videoElement.srcObject = stream;
+				}
+                })
+                .catch((onError) =>{
+                    console.log(onError);
+                    //Todo: do something with the error
+                });
         }else {
             setWebCamOpen(false);
             setIsLoading(false);
@@ -23,6 +36,8 @@ const AvatarWebcam = () => {
     const closeWebcam = () => {
         setWebCamOpen(false);
         setIsLoading(false);
+        let webcamElement = document.getElementById('webcam-element');
+		webcamElement.srcObject.getTracks()[0].stop();
     };
     
   return (
@@ -34,6 +49,7 @@ const AvatarWebcam = () => {
                 muted 
                 autoPlay
                 className='webcam__video'
+                id='webcam-element'
                 ></video>
 
                 {
