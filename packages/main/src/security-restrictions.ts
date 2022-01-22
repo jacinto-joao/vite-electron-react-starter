@@ -51,7 +51,7 @@ if (micStatus =='not-determined'){
  *   href="https://github.com/"
  * >
  */
-const ALLOWED_EXTERNAL_ORIGINS = new Set<`https://${string}` | `http://${string}`>([
+const ALLOWED_EXTERNAL_ORIGINS = new Set<`https://${string}`>([
   'https://vitejs.dev',
   'https://github.com',
   'https://reactjs.org',

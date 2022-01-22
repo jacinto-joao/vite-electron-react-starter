@@ -4,6 +4,7 @@ import Webcam from 'webcamjs';
 function Avatar() {
 
  const [isCameraOpen, setIsCameraOpen] = useState(false);
+ const [isPhotoTaken, setIsPhotoTaken] = useState(false);
  const [openCameraLabel, setOpenCameraLabel] = useState<string>('Open camera');
   useEffect(() => {
     initCamera();
@@ -22,13 +23,6 @@ function Avatar() {
   //Open camera and take picture.
   const takePicture = async () =>{
     setOpenCameraLabel('Please wait...');
-    /*
-    navigator.mediaDevices.getUserMedia({video: true,audio: false}).then((status) =>{
-      console.log(status);
-    }).catch((onError) =>{
-      console.log(onError);
-    });*/
-
     if (!isCameraOpen) {
       await	Webcam.attach( '#camera-container');
 
@@ -43,8 +37,6 @@ function Avatar() {
       });
      }, 2000);
     }
-
-   
   };
 
   //close camera
@@ -52,11 +44,6 @@ function Avatar() {
     setIsCameraOpen(false);
    await Webcam.reset();
     setOpenCameraLabel('Open camera');
-
-    //Im using navigator to stop camera in case webCam fails to close camera.
-    navigator.mediaDevices.getUserMedia((stream) =>{
-      stream.stop();
-    });
   };
 
   return (
